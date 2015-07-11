@@ -20,12 +20,12 @@ function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
     if(WindowHandler.isVerticalScreen()) {
         triggleFrameIndex = 27;
         for (var i = 7; i < 89; i++) {
-            frames.push('/images/mb_page1/a'+Helper.leadingZeroString(2,i)+".jpg");
+            frames.push('images/mb_page1/a'+Helper.leadingZeroString(2,i)+".jpg");
         };    
     }else{
         triggleFrameIndex = 36;
         for (var i = 0; i < 82; i++) {
-            frames.push('/images/page1/a'+Helper.leadingZeroString(2,i)+".jpg");
+            frames.push('images/page1/a'+Helper.leadingZeroString(2,i)+".jpg");
         };    
     }
     
