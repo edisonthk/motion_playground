@@ -8,6 +8,7 @@ angular.module('windowModule',[])
             VERTICAL_SCREEN:   2,
             initialize: function() {
                 var self = this;
+
                 angular.element(w).on('resize', function(){
                     // scopeを更新
                     self.sizingEvent();

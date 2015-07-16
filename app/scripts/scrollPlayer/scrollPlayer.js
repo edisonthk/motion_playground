@@ -21,6 +21,7 @@ function ScrollPlayer() {
     self.userFunEventCallback = null;
     self.funEventTriggled = false;
     self.funTriggleFrameIndex = 36;
+    self.dummyElement = document.getElementById("dummyElement");
 
 
     self.applicationFunEvent = function($scope,ctrl,indexFrame) {
@@ -61,9 +62,8 @@ function ScrollPlayer() {
 
         ctrl.control = self.control;
 
-        angular.element(w).bind('scroll', function(e){
-            var indexFrame = parseInt(w.pageYOffset / self.framePerPixel);
-            console.log(indexFrame);
+        angular.element(self.dummyElement).bind('scroll', function(e){
+            var indexFrame = parseInt((-self.dummyElement.children[0].getBoundingClientRect().top) / self.framePerPixel);
             if(indexFrame >= 0 && indexFrame < self.frames.length && !self.funEventTriggled) {
                 self.indexFrame = indexFrame;
                 if(self.indexFrame >= self.funTriggleFrameIndex) {
