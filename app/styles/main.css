@@ -63,7 +63,9 @@ body {
     background-color: white;
     opacity:0.7;
 }
-
+.bottom-word.screen {
+    z-index: 1;
+}
 .bottom-word {
     bottom: 30px;
     font-weight: bold;
