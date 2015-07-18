@@ -18,9 +18,9 @@ function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
     ;
 
     if(WindowHandler.isVerticalScreen()) {
-        triggleFrameIndex = 27;
-        for (var i = 7; i < 89; i++) {
-            frames.push('assets/mb_page1/a'+Helper.leadingZeroString(2,i)+".jpg");
+        triggleFrameIndex = 38;
+        for (var i = 0; i < 80; i++) {
+            frames.push('assets/mb_page1a/a'+Helper.leadingZeroString(4,i)+".jpg");
         };    
     }else{
         triggleFrameIndex = 36;
