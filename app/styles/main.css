@@ -54,6 +54,51 @@ body {
     z-index: 2;
 }
 
+/* position */
+.right {
+    right: 0;
+}
+
+.center {
+    top: 50%;
+}
+
+.left {
+    left: 0;
+}
+
+.row:before {
+    display: table;
+    content: " ";
+}
+
+.row:after {
+    display: table;
+    content: " ";
+    clear: both;
+}
+.col{
+    float: left;
+}
+.half {
+    width: 50%;
+}
+
+
+/* bike application */
+.bike {
+    width: 280px;
+}
+.bike.center {
+    margin-top: -150px;
+}
+.bike.right {
+    margin-right: 20px;
+}
+.bike p {
+    font-size: 13px;
+}
+
 /* ngAnimate */
 .white {
     width: 100%;

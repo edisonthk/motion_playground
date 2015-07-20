@@ -21,8 +21,10 @@ angular
     'canvasModule.player',
     'windowModule',
 
-    'motionPlaygroundApp.page1',
     'helpers',
+
+    'motionPlaygroundApp.page1',
+    'motionPlaygroundApp.bike',
 
   ])
   .config(function ($routeProvider) {
@@ -31,6 +33,11 @@ angular
         templateUrl: 'views/page1.html',
         controller: 'page1Ctrl',
         controllerAs: 'page1'
+      })
+      .when('/bike', {
+        templateUrl: 'views/bike.html',
+        controller: 'bikeCtrl',
+        controllerAs: 'bike'
       })
       // .when('/about', {
       //   templateUrl: 'views/about.html',
