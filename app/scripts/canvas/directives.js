@@ -93,31 +93,24 @@ angular.module('canvasModule',[])
 
         // resizeイベントを遅延する効果が働きます
         scope.$watch('canvasWidth', function() {
-            clearTimeout(scope.timeout_id_for_background);
-            scope.timeout_id_for_background = setTimeout(function(){
-                
-                restoreFrame();
+            restoreFrame();
 
-                if(typeof resizedCallback === 'function') {
-                    resizedCallback();
-                }
-            },100);
+            if(typeof resizedCallback === 'function') {
+                resizedCallback();
+            }
         });
         scope.$watch('canvasHeight', function() {
-            clearTimeout(scope.timeout_id_for_background);
-            scope.timeout_id_for_background = setTimeout(function(){
+            restoreFrame();
 
-                restoreFrame();
-
-                if(typeof resizedCallback === 'function') {
-                    resizedCallback();
-                }  
-            }, 100);
+            if(typeof resizedCallback === 'function') {
+                resizedCallback();
+            }  
         });
 
         var updateCanvasSize = function() {
             scope.canvasWidth = WindowHandler.windowWidth;
             scope.canvasHeight = WindowHandler.windowHeight;
+            console.log(scope.canvasWidth + " " + scope.canvasHeight);
         };
 
         angular.element(w).on('resize', function(){
