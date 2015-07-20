@@ -29,7 +29,8 @@ function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
         };    
     }
     
-    console.log(frames.length);
+    
+    self.cnt = 0;
 
     var framesLoadedEvent = function() {
         console.log("framesLoadedEvent");
@@ -39,11 +40,13 @@ function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
     var initialize = function() {
         self.initial = true;
         self.show = false;
+        console.log(self.cnt);
     };
 
     var funEventTriggled = function() {
-        console.log("triggle");
+        console.log("triggled");
         self.show = true;
+        self.cnt ++;
     }
 
     self.reset = function() {

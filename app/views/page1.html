@@ -1,10 +1,14 @@
 <div class="screen bottom-word" ng-if="!page1.show">
-    ゆっくりスコロール<br/>しないと。。。
+    <span ng-if="page1.cnt % 3 == 0">ゆっくりスクロール</span>
+    <span ng-if="page1.cnt % 3 == 1">はやくスクロール</span>
+    <span ng-if="page1.cnt % 3 == 2">早くも遅くもない<br />スクロール</span>
+    <br/>しても。。。
 </div>
 <div class="screen white" ng-if="page1.show">
     <div class="content">
-        <p>卵が割れました</p>
-        <button ng-click="page1.reset()">
+        <p>卵が割れます</p>
+        <p ng-if="page1.cnt % 3 == 0">ありがとうございます</p>
+        <button ng-if="page1.cnt % 3 != 0" ng-click="page1.reset()">
             <img src="images/icon/ic_retry.png"><br/>
             <span>もう一回</span>
         </button>
