@@ -1,12 +1,12 @@
 # motion-playground
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.12.0.
+このプロジェクトは個人の勉強と趣味で作られたサイトです。興味のある方は次のリンクにてご覧になってください。
 
-## Build & development
+こちらのissueにてコメントを残してくれると嬉しいです。
 
-Run `grunt` for building and `grunt serve` for preview.
+[playground.edisonthk.com/a2](http://playground.edisonthk.com/a2/)
 
-## Testing
+### 補足
 
-Running `grunt test` will run the unit tests with karma.
+こちらのプロジェクトは[yo angular generator](https://github.com/yeoman/generator-angular)によって生成されたテンプレートからコーディングを始めたものです。
+
