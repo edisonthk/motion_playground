@@ -15,7 +15,7 @@ function ScrollPlayer() {
 
     self.framePerPixel = 10;
     self.frames = [];
-    self.control = {},
+    self.control = {};
     self.indexFrame = 0;
     self.userFramesLoadedCallback = null;
     self.userFunEventCallback = null;
@@ -31,15 +31,10 @@ function ScrollPlayer() {
         };
 
         if(typeof self.userFunEventCallback === 'function') {
-                self.userFunEventCallback();
-            }   
+            self.userFunEventCallback();
+        }   
 
-        $scope.$apply(function() {
-            
-        });
         self.indexFrame = indexFrame;
-
-        
 
         self.intervalId = setInterval(function() {
             self.indexFrame ++;
@@ -51,7 +46,7 @@ function ScrollPlayer() {
             
             $scope.$apply();
         },1000/24);
-    }
+    };
 
 
 
@@ -62,7 +57,7 @@ function ScrollPlayer() {
 
         ctrl.control = self.control;
 
-        angular.element(self.dummyElement).bind('scroll', function(e){
+        angular.element(self.dummyElement).bind('scroll', function(){
             var indexFrame = parseInt((-self.dummyElement.children[0].getBoundingClientRect().top) / self.framePerPixel);
             if(indexFrame >= 0 && indexFrame < self.frames.length && !self.funEventTriggled) {
                 self.indexFrame = indexFrame;
@@ -92,7 +87,7 @@ function ScrollPlayer() {
             self.funEventTriggled = false;
             self.updateDummyStyles(ctrl, WindowHandler);
             self.play(0);
-        }
+        };
 
         self.play = function(frameIndex) {
             self.control.draw(self.frames[frameIndex]);
@@ -103,13 +98,13 @@ function ScrollPlayer() {
         ctrl.dummyStyles = {
             height : (WindowHandler.windowHeight + (self.framePerPixel * self.frames.length)) + 'px'
         };
-    }
+    };
 
     self.getFrames = function() {
         return self.frames;
     };
 
-    self.factory = function(FramesFactory,w,WindowHandler) {
+    self.factory = function(FramesFactory) {
         
         return {
             setFrames:         FramesFactory.setFrames,
@@ -132,7 +127,7 @@ function ScrollPlayer() {
 var player = new ScrollPlayer();
 
 angular.module('canvasModule.player',[])
-    .factory('ScrollPlayer', ['FramesFactory','$window','WindowHandler', player.factory])
+    .factory('ScrollPlayer', ['FramesFactory', player.factory])
     .controller('CanvasPlayerCtrl',['$scope','FramesFactory','$window','WindowHandler',player.controller ])
 ;
 

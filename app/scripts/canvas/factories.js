@@ -2,39 +2,6 @@
 
 'use strict';
 
-function FramesFactory(WindowHandler) {
-
-    var self = this
-        ;
-
-    self.frames = [];
-    self.loadedCallback = null;
-    self.progressUpdateCallback = null;
-
-    // extends FramesFactory with ImageLoader
-    self.loader = new ImageLoader();
-    
-    self.getFrames = function() {
-        return self.loader.getImagesTag();
-    };
-
-    self.setFrames = function(frames) {
-        self.frames = [];
-        var links = [];
-        var imageLinks = [];
-        self.loader.setImagesUrl(frames);
-    };
-
-    self.setLoadedCallback = function(cb) {
-        self.loader.setLoadedCallback(cb);
-    };
-
-    self.load = function() {
-        self.loader.load();
-    };
-
-    return self;
-}
 
  function ImageLoader() {
     var self = this;
@@ -105,9 +72,39 @@ function FramesFactory(WindowHandler) {
     self.setLoadedCallback = function(cb) {
         self.loadedCallback = cb;
     };
-};
+}
 
+function FramesFactory() {
 
+    var self = this
+        ;
+
+    self.frames = [];
+    self.loadedCallback = null;
+    self.progressUpdateCallback = null;
+
+    // extends FramesFactory with ImageLoader
+    self.loader = new ImageLoader();
+    
+    self.getFrames = function() {
+        return self.loader.getImagesTag();
+    };
+
+    self.setFrames = function(frames) {
+        self.frames = [];
+        self.loader.setImagesUrl(frames);
+    };
+
+    self.setLoadedCallback = function(cb) {
+        self.loader.setLoadedCallback(cb);
+    };
+
+    self.load = function() {
+        self.loader.load();
+    };
+
+    return self;
+}
 
 angular.module('canvasModule.factories',[])
     .factory('FramesFactory', [ 'WindowHandler', FramesFactory]);

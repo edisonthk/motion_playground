@@ -7,7 +7,25 @@
 <div class="screen white" ng-if="page1.show">
     <div class="content">
         <p>卵が割れます</p>
-        <p ng-if="page1.cnt % 3 == 0">ありがとうございます</p>
+        <div ng-if="page1.cnt % 3 == 0">
+            <p>ありがとうございます</p>
+            <div>
+                <button 
+                    class="fa fa-twitter" 
+                    socialshare 
+                    socialshare-provider="twitter" 
+                    >
+                </button>
+
+                <button 
+                    class="fa fa-facebook" 
+                    socialshare 
+                    socialshare-provider="facebook" 
+                    >
+                </button>
+
+            </div>
+        </div>
         <button ng-if="page1.cnt % 3 != 0" ng-click="page1.reset()">
             <img src="images/icon/ic_retry.png"><br/>
             <span>もう一回</span>

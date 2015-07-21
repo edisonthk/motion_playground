@@ -15,6 +15,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngAnimate',
+    '720kb.socialshare',
     
     'canvasModule',
     'canvasModule.factories',

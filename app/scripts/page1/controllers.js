@@ -10,23 +10,24 @@
  * Controller of the motionPlaygroundApp
  */
 
-function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
+var page1Ctrl = function(ScrollPlayer,WindowHandler,Helper) {
 
     var self = this,
         triggleFrameIndex = 36,
-        frames = []
+        frames = [],
+        i = 0
     ;
 
     if(WindowHandler.isVerticalScreen()) {
         triggleFrameIndex = 38;
-        for (var i = 0; i < 80; i++) {
+        for (i = 0; i < 80; i++) {
             frames.push('assets/mb_page1a/a'+Helper.leadingZeroString(4,i)+".jpg");
-        };    
+        }
     }else{
         triggleFrameIndex = 36;
-        for (var i = 0; i < 82; i++) {
+        for (i = 0; i < 82; i++) {
             frames.push('assets/page1/a'+Helper.leadingZeroString(2,i)+".jpg");
-        };    
+        }
     }
     
     
@@ -47,12 +48,12 @@ function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
         console.log("triggled");
         self.show = true;
         self.cnt ++;
-    }
+    };
 
     self.reset = function() {
         self.show = false;
         ScrollPlayer.reset();
-    }
+    };
 
     ScrollPlayer.setFrames(frames);
     ScrollPlayer.setLoadedCallback(framesLoadedEvent);
@@ -61,7 +62,7 @@ function page1Ctrl(ScrollPlayer,WindowHandler,Helper) {
     ScrollPlayer.ready();
 
     initialize();
-}
+};
 
 angular.module('motionPlaygroundApp.page1',['ngAnimate'])
   

@@ -54,6 +54,17 @@ body {
     z-index: 2;
 }
 
+.fa[socialshare] {
+    background: #323232;
+    display: inline-block;
+      width: 2em;
+      height: 2em;
+      color: white;
+      border-radius: 1.25em;
+      border-color: transparent;
+      margin: 0px 3px;
+}
+
 /* ngAnimate */
 .white {
     width: 100%;
