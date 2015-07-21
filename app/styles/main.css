@@ -95,8 +95,33 @@ body {
 .bike.right {
     margin-right: 20px;
 }
+.bike .onright {
+    padding-left: 12px;
+}
+.bike .onleft {
+    padding-right: 12px;
+}
 .bike p {
     font-size: 13px;
+}
+
+.bike h3 {
+    font-size: 25px;
+}
+
+@media (max-width: 480px) {  
+    .bike {
+        width: 185px;
+    }
+    .bike .onright {
+        padding-left: 8px;
+    }
+    .bike .onleft {
+        padding-right: 8px;
+    }
+    .bike p {
+        font-size: 7px;
+    }
 }
 
 /* ngAnimate */

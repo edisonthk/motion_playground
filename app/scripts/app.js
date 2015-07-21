@@ -29,7 +29,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/egg', {
         templateUrl: 'views/page1.html',
         controller: 'page1Ctrl',
         controllerAs: 'page1'
@@ -45,6 +45,6 @@ angular
       //   controllerAs: 'about'
       // })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/bike'
       });
   });
