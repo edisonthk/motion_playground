@@ -84,6 +84,17 @@ body {
     width: 50%;
 }
 
+.fa[socialshare] {
+    background: #323232;
+    display: inline-block;
+      width: 2em;
+      height: 2em;
+      color: white;
+      border-radius: 1.25em;
+      border-color: transparent;
+      margin: 0px 3px;
+}
+
 
 /* bike application */
 .bike {
@@ -122,6 +133,7 @@ body {
     .bike p {
         font-size: 7px;
     }
+
 }
 
 /* ngAnimate */

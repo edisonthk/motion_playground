@@ -20,14 +20,10 @@ angular.module('canvasModule',[])
       template: '<canvas id="gafewVA21Z" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas><div style="position:absolute;" ng-transclude></div>',
       link: function(scope){
         
-        var control = {},
-            cnt_pause = 0,
-            canvas = document.getElementById("gafewVA21Z"),
-            currentFrameIndex = 0,
+        
+        var canvas = document.getElementById("gafewVA21Z"),
             currentFrames = [],
             currentFrame = null,
-            frames = [],
-            intervalIndex = null,
             resizedCallback = null
             ;
         
@@ -110,7 +106,6 @@ angular.module('canvasModule',[])
         var updateCanvasSize = function() {
             scope.canvasWidth = WindowHandler.windowWidth;
             scope.canvasHeight = WindowHandler.windowHeight;
-            console.log(scope.canvasWidth + " " + scope.canvasHeight);
         };
 
         angular.element(w).on('resize', function(){
@@ -120,11 +115,10 @@ angular.module('canvasModule',[])
         });
 
         var restoreFrame = function() {
-            console.log("fdsfsd");
-            if(currentFrame != null) {
+            if(currentFrame !== null) {
                 scope.control.draw(currentFrame);    
             }
-        }
+        };
 
         var drawImageProp = function(ctx, img, x, y, w, h, offsetX, offsetY) {
 
@@ -181,7 +175,7 @@ angular.module('canvasModule',[])
             
             drawImageProp(ctx, imageFrame, 0, 0 ,scope.canvasWidth, scope.canvasHeight);
             
-        }
+        };
 
         // videoタグに関するイベント
         // BEGIN: API
@@ -192,16 +186,16 @@ angular.module('canvasModule',[])
                 currentFrame = currentFrames[0];
             }
         };
-        scope.control.play = function() {
-            clearInterval(intervalIndex);
-            scope.state.current = scope.state.FLAG_PLAY;
-            currentFrameIndex = 0;
-            intervalIndex = setInterval(canvasDrawImage, 1000/20);
-        };
-        scope.control.stop = function() {
-            scope.state.current = scope.state.FLAG_PAUSE;
-            clearInterval(intervalIndex);
-        };
+        // scope.control.play = function() {
+        //     clearInterval(intervalIndex);
+        //     scope.state.current = scope.state.FLAG_PLAY;
+        //     currentFrameIndex = 0;
+        //     intervalIndex = setInterval(canvasDrawImage, 1000/20);
+        // };
+        // scope.control.stop = function() {
+        //     scope.state.current = scope.state.FLAG_PAUSE;
+        //     clearInterval(intervalIndex);
+        // };
         scope.control.pause = function() {
             scope.control.stop();
         };
