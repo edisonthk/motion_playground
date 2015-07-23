@@ -19,6 +19,9 @@ function ScrollPlayer() {
     self.indexFrame = 0;
     self.userFramesLoadedCallback = null;
     self.userFunEventCallback = null;
+    self.userScrollEvent = null;
+    self.userDefinedSize = false;
+
     self.funEventTriggled = false;
     self.funTriggleFrameIndex = 36;
     self.dummyElement = document.getElementById("dummyElement");
@@ -58,7 +61,8 @@ function ScrollPlayer() {
         ctrl.control = self.control;
 
         angular.element(self.dummyElement).bind('scroll', function(){
-            var indexFrame = parseInt((-self.dummyElement.children[0].getBoundingClientRect().top) / self.framePerPixel);
+            var offsetTop = 0 - self.dummyElement.children[0].getBoundingClientRect().top;
+            var indexFrame = parseInt(offsetTop / self.framePerPixel);
             if(indexFrame >= 0 && indexFrame < self.frames.length && !self.funEventTriggled) {
                 self.indexFrame = indexFrame;
                 if(self.indexFrame >= self.funTriggleFrameIndex) {
@@ -67,6 +71,11 @@ function ScrollPlayer() {
                     self.play(self.indexFrame);        
                 }
             }
+
+            if(typeof self.userScrollEvent === 'function') {
+                self.userScrollEvent(offsetTop);
+            }
+            $scope.$apply();
         });
 
         FramesFactory.setLoadedCallback(function() {
@@ -85,19 +94,38 @@ function ScrollPlayer() {
         self.reset = function() {
             clearInterval(self.intervalId);
             self.funEventTriggled = false;
+
             self.updateDummyStyles(ctrl, WindowHandler);
             self.play(0);
         };
 
-        self.play = function(frameIndex) {
-            self.control.draw(self.frames[frameIndex]);
+        self.setFullScreen = function(fullScreen) {
+            ctrl.control.setFullScreen(fullScreen);
+        };
+        
+
+        self.setScrollLayerHeight = function(height) {
+            ctrl.dummyStyles.height = height + "px";
+            self.userDefinedSize = true;
+            // $scope.$apply();
+        };
+
+        self.play = function(frameIndex, x ,y,w,h) {
+            self.control.clear();
+            self.control.draw(self.frames[frameIndex], x , y,w,h);
         };
     };
 
     self.updateDummyStyles = function(ctrl, WindowHandler) {
-        ctrl.dummyStyles = {
-            height : (WindowHandler.windowHeight + (self.framePerPixel * self.frames.length)) + 'px'
-        };
+        if(!self.userDefinedSize) {
+            ctrl.dummyStyles = {
+                height : (WindowHandler.windowHeight + (self.framePerPixel * self.frames.length)) + 'px'
+            };
+        }
+    };
+
+    self.setDummyHeight = function(height) {
+
     };
 
     self.getFrames = function() {
@@ -111,6 +139,8 @@ function ScrollPlayer() {
             ready:             FramesFactory.load,
             play:              self.play,
             reset:             self.reset,
+            setScrollLayerHeight: self.setScrollLayerHeight,
+            setFullScreen       : self.setFullScreen,
             setFunEventTriggledCallback: function(cb) {
                 self.userFunEventCallback = cb;
             },
@@ -119,6 +149,9 @@ function ScrollPlayer() {
             },
             setFunTriggleFrameIndex: function(frameIndex) {
                 self.funTriggleFrameIndex = frameIndex;
+            },
+            setScrollEvent: function(e) {
+                self.userScrollEvent = e;
             },
         };
     };

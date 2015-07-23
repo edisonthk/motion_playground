@@ -40,6 +40,7 @@ angular.module('canvasModule',[])
           initial: 0,
         };
         scope.state.current = scope.state.FLAG_PAUSE;
+        scope.fullScreen = true;
         scope.eventsWhenCanPlay = [];
         scope.eventsWhenEnded = [];
 
@@ -170,12 +171,22 @@ angular.module('canvasModule',[])
         
         updateCanvasSize();
 
-        scope.control.draw = function(imageFrame) {
-            currentFrame = imageFrame;
-            
-            drawImageProp(ctx, imageFrame, 0, 0 ,scope.canvasWidth, scope.canvasHeight);
-            
+        scope.control.setFullScreen = function(fullScreen) {
+            scope.fullScreen = fullScreen;
         };
+
+        scope.control.draw = function(imageFrame, x, y, w, h) {
+            currentFrame = imageFrame;
+            if(scope.fullScreen) {
+                drawImageProp(ctx, imageFrame, 0, 0 ,scope.canvasWidth, scope.canvasHeight);    
+            }else{
+                drawImageProp(ctx, imageFrame, x,y,w,h);
+            }
+        };
+        scope.control.clear = function() {
+            ctx.clearRect(0,0,scope.canvasWidth,scope.canvasHeight);
+        };
+
 
         // videoタグに関するイベント
         // BEGIN: API

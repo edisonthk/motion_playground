@@ -54,6 +54,10 @@ body {
     z-index: 2;
 }
 
+.full.screen {
+    height: 100%;
+    width: 100%;
+}
 /* position */
 .right {
     right: 0;
@@ -119,6 +123,19 @@ body {
 .bike h3 {
     font-size: 25px;
 }
+
+.bike.trail {
+    position: absolute;
+    z-index: 0;
+    left: 30px;
+}
+
+.bike.trail > div{
+    display: block;
+    width: 10px;
+    background-color: blue;
+}
+
 
 @media (max-width: 480px) {  
     .bike {

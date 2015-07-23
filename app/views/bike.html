@@ -1,5 +1,6 @@
 <div class="screen right center bike">
-    <h3>安全運転</h3>
+    <h3 ng-if="!bike.fun">安全運転</h3>
+    <h3 ng-if="bike.fun">FUN</h3>
     <hr />
     <div class="row">
         <div class="col half">
@@ -9,4 +10,8 @@
             <p class="onright">それと伴い自転車の事故も増えてきました。そこで、早いスピードで運転するのと遅いスピードで運転する人が違うことがわかります。</p>
         </div>
     </div>
+</div>
+
+<div class="full screen bike trail">
+    <div ng-style="bike.trailStyles"></div>
 </div>
