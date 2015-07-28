@@ -11,21 +11,47 @@
  */
 
 function Bike(ScrollPlayer) {
-    var self = this,
-        height = 100,
-        width = 100
+    var self = this
         ;
     
-    self.move = function(x,y) {
-        ScrollPlayer.play(0, x, y,width,height);
+    // constant
+    self.height = 183;
+    self.width = 284;
+    self.funAnimationInterval = 300;
 
+
+    self.frames = [];
+    self.currentFrame = 0;
+    self.crashAnimationIntervalId = null;
+
+    self.setCrashFrames = function(frames) {
+        self.frames = frames;
+    }
+
+    self.move = function(x,y) {
+        ScrollPlayer.play(0, x, y,self.width,self.height);
+    }
+
+    self.crash = function(x,y) {
+        clearInterval(self.crashAnimationIntervalId);
+        self.currentFrame = 0;
+
+        self.crashAnimationIntervalId = setInterval(function() {
+            if(self.currentFrame >= self.frames.length) {
+                clearInterval(self.crashAnimationIntervalId);
+                return;
+            }
+
+            ScrollPlayer.play(self.currentFrame, x, y,self.width,self.height);
+            self.currentFrame ++;
+        }, self.funAnimationInterval);
     }
 }
 
 function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
 
     var self = this,
-        frames = ["assets/bike/bike.png"],
+        frames = [],
         bike = new Bike(ScrollPlayer, WindowHandler)
     ;
 
@@ -33,8 +59,16 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
         bottom: "0",
         position: "absolute",
     };
+
+    // set crash frames
+    for (var i = 1; i <= 6; i++) {
+        frames.push("assets/bike/bike"+Helper.leadingZeroString(3,i)+".png");
+    };
+    bike.setCrashFrames(frames);
+
     
-    self.cnt = 0;
+    self.funEventIntervalId = null;
+    self.currentFrame = 0;
     self.fun = false;
 
     var framesLoadedEvent = function() {
@@ -49,13 +83,13 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
         self.trailStyles.height = "50px";
     };
 
+
     var funEventTriggle = function() {
         self.fun = true;
         ScrollPlayer.setScrollLayerHeight(0);
 
-        console.log("fun");
-        bike.move(0, WindowHandler.windowHeight - 100);
-    };
+        bike.crash(0, 0);
+    };  
 
     var scrollEvent = function(offsetTop) {
         if(self.fun) {
@@ -76,6 +110,7 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
     self.reset = function() {
         self.show = false;
         ScrollPlayer.reset();
+        self.currentFrame = 0;
     }
 
     ScrollPlayer.setFullScreen(false);
