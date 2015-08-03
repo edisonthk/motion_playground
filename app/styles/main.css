@@ -134,11 +134,11 @@ body {
     padding-right: 12px;
 }
 .bike p {
-    font-size: 13px;
+    font-size: 0.7em;
 }
 
 .bike h3 {
-    font-size: 22px;
+    font-size: 1.3em;
 }
 
 .bike.trail {
