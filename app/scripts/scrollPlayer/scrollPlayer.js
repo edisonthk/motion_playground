@@ -23,7 +23,7 @@ function ScrollPlayer() {
     self.userDefinedSize = false;
 
     self.funEventTriggled = false;
-    self.funTriggleFrameIndex = 36;
+    self.funTriggleFrameIndex = -1;
     self.dummyElement = document.getElementById("dummyElement");
 
 
@@ -65,7 +65,7 @@ function ScrollPlayer() {
             var indexFrame = parseInt(offsetTop / self.framePerPixel);
             if(indexFrame >= 0 && indexFrame < self.frames.length && !self.funEventTriggled) {
                 self.indexFrame = indexFrame;
-                if(self.indexFrame >= self.funTriggleFrameIndex) {
+                if(self.funTriggleFrameIndex > 0 && self.indexFrame >= self.funTriggleFrameIndex) {
                     self.applicationFunEvent($scope,ctrl, indexFrame);
                 }else{
                     self.play(self.indexFrame);        

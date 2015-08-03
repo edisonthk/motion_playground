@@ -58,6 +58,21 @@ body {
     height: 100%;
     width: 100%;
 }
+
+.egg.screen {
+    z-index: 2;
+}
+
+.responsive-container {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+    display: block;
+}
+
+
 /* position */
 .right {
     right: 0;
@@ -70,6 +85,8 @@ body {
 .left {
     left: 0;
 }
+
+
 
 .row:before {
     display: table;
@@ -128,6 +145,7 @@ body {
     position: absolute;
     z-index: -1;
     left: 23px;
+    bottom: 0;
 }
 
 .bike.trail > div{
@@ -135,6 +153,8 @@ body {
     width: 7px;
     background: #fff url(../images/trail.png) repeat-y;
 }
+
+
 
 
 @media (max-width: 480px) {  

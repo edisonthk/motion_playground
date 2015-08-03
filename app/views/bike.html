@@ -1,17 +1,21 @@
-<div class="screen right center bike">
-    <h3 ng-if="!bike.fun">安全運転しないと</h3>
-    <h3 ng-if="bike.fun">怪我します</h3>
-    <hr />
-    <div class="row">
-        <div class="col half">
-            <p class="onleft">車利用者に限る話ではありませんが、自転車の利用者も同様に責任を持って運転する義務があります。最近自転車で通勤する人が増えてきました。</p>
+<div class="full screen">
+    <div class="responsive-container">
+        <div class="screen right center bike">
+            <h3 ng-if="!bike.fun">安全運転しないと</h3>
+            <h3 ng-if="bike.fun">怪我します</h3>
+            <hr />
+            <div class="row">
+                <div class="col half">
+                    <p class="onleft">車利用者に限る話ではありませんが、自転車の利用者も同様に責任を持って運転する義務があります。最近自転車で通勤する人が増えてきました。</p>
+                </div>
+                <div class="col half">
+                    <p class="onright">それと伴い自転車の事故も増えてきました。そこで、早いスピードで運転するのと遅いスピードで運転する人が違うことがわかります。</p>
+                </div>
+            </div>
         </div>
-        <div class="col half">
-            <p class="onright">それと伴い自転車の事故も増えてきました。そこで、早いスピードで運転するのと遅いスピードで運転する人が違うことがわかります。</p>
+        <div class="bike trail">
+            <div ng-style="bike.trailStyles"></div>
         </div>
     </div>
 </div>
 
-<div class="full screen bike trail">
-    <div ng-style="bike.trailStyles"></div>
-</div>

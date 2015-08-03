@@ -17,7 +17,7 @@ function Bike(ScrollPlayer) {
     // constant
     self.height = 183;
     self.width = 284;
-    self.funAnimationInterval = 300;
+    self.funAnimationInterval = 1000/ 23;
 
 
     self.frames = [];
@@ -48,7 +48,7 @@ function Bike(ScrollPlayer) {
     }
 }
 
-function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
+function bikeCtrl(scope, ScrollPlayer,WindowHandler,Helper) {
 
     var self = this,
         frames = [],
@@ -61,9 +61,15 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
     };
 
     // set crash frames
-    for (var i = 1; i <= 6; i++) {
-        frames.push("assets/bike/bike"+Helper.leadingZeroString(3,i)+".png");
-    };
+    for (var i = 1; i <= 17; i++) {
+        if(i < 7) {
+            for (var j = 0; j < 10; j++) {
+                frames.push("assets/bike/bike"+Helper.leadingZeroString(3,i)+".jpg");        
+            }
+        }else{
+            frames.push("assets/bike/bike"+Helper.leadingZeroString(3,i)+".jpg");    
+        }
+    }
     bike.setCrashFrames(frames);
 
     
@@ -71,16 +77,23 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
     self.currentFrame = 0;
     self.fun = false;
 
+    var updateBikeLeftPosition = function() {
+        var container = document.querySelector("div.responsive-container");
+        self.bikeLeftPosition = (WindowHandler.windowWidth - container.clientWidth) / 2;
+    };
+
     var framesLoadedEvent = function() {
         console.log("framesLoadedEvent");
         self.initial = false;  
-        bike.move(0, WindowHandler.windowHeight - 150);
+        self.bikeTopPosition    = WindowHandler.windowHeight - 150;
+        bike.move(self.bikeLeftPosition, self.bikeTopPosition);
     };
 
     var initialize = function() {
         self.initial = true;
         self.show = false;
         self.trailStyles.height = "50px";
+        updateBikeLeftPosition();
     };
 
 
@@ -88,7 +101,7 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
         self.fun = true;
         ScrollPlayer.setScrollLayerHeight(0);
 
-        bike.crash(0, 0);
+        bike.crash(self.bikeLeftPosition, 0);
     };  
 
     var scrollEvent = function(offsetTop) {
@@ -100,10 +113,13 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
             funEventTriggle();
         }else if(offsetTop > 50) {
             self.trailStyles.height = offsetTop+"px";    
-            bike.move(0, WindowHandler.windowHeight - offsetTop - 100);
+            self.bikeTopPosition    = WindowHandler.windowHeight - offsetTop - 100;
+            bike.move(self.bikeLeftPosition, self.bikeTopPosition);
+            console.log(self.bikeTopPosition);
 
         }else{
-            bike.move(0, WindowHandler.windowHeight - 150);
+            self.bikeTopPosition = WindowHandler.windowHeight - 150;
+            bike.move(self.bikeLeftPosition, self.bikeTopPosition);
         }
     };
 
@@ -111,7 +127,15 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
         self.show = false;
         ScrollPlayer.reset();
         self.currentFrame = 0;
-    }
+    };
+
+    var resizedEvent = function() {
+        updateBikeLeftPosition();
+        // console.log(self.bikeLeftPosition + " " + self.bikeTopPosition);
+        bike.move(self.bikeLeftPosition, self.bikeTopPosition);
+    };
+
+    WindowHandler.setResizeCallback(resizedEvent, scope);
 
     ScrollPlayer.setFullScreen(false);
     ScrollPlayer.setScrollLayerHeight(1800);
@@ -126,6 +150,6 @@ function bikeCtrl(ScrollPlayer,WindowHandler,Helper) {
 
 angular.module('motionPlaygroundApp.bike',['ngAnimate'])
   
-  .controller('bikeCtrl', ['ScrollPlayer','WindowHandler','Helper',bikeCtrl]);
+  .controller('bikeCtrl', ['$scope','ScrollPlayer','WindowHandler','Helper',bikeCtrl]);
 
 })();
