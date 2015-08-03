@@ -61,6 +61,7 @@ function bikeCtrl(scope, ScrollPlayer,WindowHandler,Helper) {
     };
 
     // set crash frames
+    frames.push("assets/bike/bike"+Helper.leadingZeroString(3,0)+".jpg");        
     for (var i = 1; i <= 17; i++) {
         if(i < 7) {
             for (var j = 0; j < 10; j++) {
