@@ -82,6 +82,10 @@ body {
     top: 50%;
 }
 
+.bottom {
+    bottom: 0;
+}
+
 .left {
     left: 0;
 }
@@ -154,7 +158,21 @@ body {
     background: #fff url(../images/trail.png) repeat-y;
 }
 
+.bike.contribute {
+    margin-bottom: 30px;
+    margin-left: 30px;
+    width: 80px;
+    font-size: 7px;
+    z-index: 7;
+}
 
+.bike.contribute p {
+    margin-bottom: 2px;
+}
+.bike.contribute a {
+    text-decoration: none;
+    color: #582658;
+}
 
 
 @media (max-width: 480px) {  
